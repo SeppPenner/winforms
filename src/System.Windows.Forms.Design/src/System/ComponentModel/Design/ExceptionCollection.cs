@@ -7,7 +7,6 @@ using System.Runtime.Serialization;
 
 namespace System.ComponentModel.Design
 {
-    [Serializable]
     public sealed class ExceptionCollection : Exception
     {
         private readonly ArrayList _exceptions;
@@ -19,20 +18,14 @@ namespace System.ComponentModel.Design
 
         private ExceptionCollection(SerializationInfo info, StreamingContext context) : base(info, context)
         {
-            _exceptions = (ArrayList)info.GetValue("exceptions", typeof(ArrayList));
+            throw new NotSupportedException();
         }
 
         public ArrayList Exceptions => (ArrayList)_exceptions?.Clone();
 
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            if (info == null)
-            {
-                throw new ArgumentNullException(nameof(info));
-            }
-
-            info.AddValue("exceptions", _exceptions);
-            base.GetObjectData(info, context);
+            throw new NotSupportedException();
         }
     }
 }
